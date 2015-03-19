@@ -1,1 +1,6 @@
-android/MyIceBox/.idea/misc.xml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
