@@ -35,6 +35,8 @@ public class MainActivity extends ActionBarActivity {
         arDessert.add(mydessert);
         mydessert = new MyDessert(R.drawable.test, "크레페");
         arDessert.add(mydessert);
+        mydessert = new MyDessert(R.drawable.test, "슈");
+        arDessert.add(mydessert);
 
         MyDessertAdapter adapter = new MyDessertAdapter(this, R.layout.item, arDessert);
 
