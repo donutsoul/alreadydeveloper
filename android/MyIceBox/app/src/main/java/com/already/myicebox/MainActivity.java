@@ -42,8 +42,9 @@ public class MainActivity extends ActionBarActivity {
 
         ListView list;
         list = (ListView)findViewById(R.id.list);
-        list.setAdapter(adapter);
+        list.setAdapter(adapter);   
 
+        System.out.print("test");
     }
 }
 
