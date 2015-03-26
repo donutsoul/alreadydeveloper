@@ -8,3 +8,5 @@ node module 추가 방법
  - npm install {module_name} --save
  - 설치 후 package.json를 보면 dependencies에 추가 되어있음
 
+node-oracledb
+https://github.com/oracle/node-oracledb
