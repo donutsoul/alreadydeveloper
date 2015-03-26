@@ -13,8 +13,8 @@ node-oracledb
 
 
 protocol
-나의 냉장고 정보 요청 ("/icebox")
- - { id : 10000, items : "banana|3 apple|2 egg|1", imgUrl : "http://www.blahblah.com/img01.jpg" }
-재료 레시피 요청 ("/icebox?item="banana|3")
+- 나의 냉장고 정보 요청 ("/icebox")
+  { id : 10000, items : "banana|3 apple|2 egg|1", imgUrl : "http://www.blahblah.com/img01.jpg" }
+- 재료 레시피 요청 ("/icebox?item="banana|3")
  
 
