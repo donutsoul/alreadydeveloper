@@ -20,6 +20,7 @@ router.get('/recipe', function(req, res) {
 	if (item == "계란") {
 		var recipeJson = { recipelist : [
 					{title : "계란말이", items : "계란 파 치즈", recipe : "#1 계란을 그릇에 푼다. #2 파를 잘게 썰어서 넣는다. #3 치즈를 넣고 섞는다. #4 후라이팬에 잘 익힌다."}]}	res.end(JSON.stringify(recipeJson));
+		res.end(JSON.stringify(recipeJson));
 	}
 });
 module.exports = router;
