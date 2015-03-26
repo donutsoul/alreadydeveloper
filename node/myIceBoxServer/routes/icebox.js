@@ -11,4 +11,10 @@ router.get('/', function(req, res) {
     res.end(JSON.stringify(sampleJson));
 });
 
+router.get('/recipe', function(req, res) {
+	// http://localhost:3000/icebox/recipe?item="사과"
+	var item = req.query.item;
+	console.log(item)
+	// if (item == "사과") { ....
+});
 module.exports = router;
