@@ -3,7 +3,6 @@ package com.already.myicebox;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,92 +13,42 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
-
-    private Button btnSend;
-    private TextView tvRecvData;
 
 
     ArrayList<MyDessert> arDessert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button buttonGet = (Button) findViewById(R.id.btn_sendData);
-        buttonGet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
+        // MyDessert 클래스 형태의 데이터 준비
+        arDessert = new ArrayList<MyDessert>();
+        MyDessert mydessert;
+        mydessert = new MyDessert(R.drawable.test, "마카롱 아이스크림");
+        arDessert.add(mydessert);
+        mydessert = new MyDessert(R.drawable.test, "베이비슈");
+        arDessert.add(mydessert);
+        mydessert = new MyDessert(R.drawable.test, "크레페");
+        arDessert.add(mydessert);
+        mydessert = new MyDessert(R.drawable.test, "슈");
+        arDessert.add(mydessert);
+        mydessert = new MyDessert(R.drawable.test, "블루베리베이글");
+        arDessert.add(mydessert);
 
-                Thread thread = new Thread() {
-                    @Override
-                    public void run() {
-                        HttpClient httpClient = new DefaultHttpClient();
+        MyDessertAdapter adapter = new MyDessertAdapter(this, R.layout.item, arDessert);
 
-                        String urlString = "http://192.168.0.10:3000/icebox/recipe";
-                        String param="?item=계란";
-                        try {
-                            URI url = new URI(urlString + param);
+        ListView list;
+        list = (ListView)findViewById(R.id.list);
+        list.setAdapter(adapter);   
 
-                            HttpGet httpGet = new HttpGet();
-                            httpGet.setURI(url);
-
-
-                            HttpResponse response = httpClient.execute(httpGet);
-                            String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
-
-                            JSONObject myObject = new JSONObject(responseString);
-                            Log.d("icebox", "json response");
-                            Log.d("icebox", myObject.toString());
-
-
-                        } catch (URISyntaxException e) {
-                            e.printStackTrace();
-                        } catch (ClientProtocolException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                };
-
-
-                thread.start();
-            }
-        });
-
-
+        System.out.print("test");
     }
-
-
-
 }
-
 
 // 리스트뷰에 출력할 항목 클래스
 class MyDessert {
