@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.already.myicebox" >
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <permission android:name="com.already.myicebox.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.already.myicebox.permission.C2D_MESSAGE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,5 +28,17 @@
             </intent-filter>
         </activity>
     </application>
+
+
+    <receiver
+        android:name=".GcmBroadcastReceiver"
+        android:permission="com.google.android.c2dm.permission.SEND" >
+        <intent-filter>
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            <category android:name="com.already.myicebox" />
+        </intent-filter>
+    </receiver>
+    <service android:name=".GcmIntentService" />
+
 
 </manifest>

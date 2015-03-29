@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Git\alreadydeveloper\android\MyIceBox\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="C:\Git\alreadydeveloper\android\MyIceBox\app\build\intermediates\pre-dexed\debug\classes-be186ae49eda57ead64b0cc8258312318ddf24a8.jar" />
+    </item>
+
+</items>
