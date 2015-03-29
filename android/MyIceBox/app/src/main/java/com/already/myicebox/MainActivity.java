@@ -13,11 +13,30 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import android.util.Log;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
+    private Button btnSend;
 
     ArrayList<MyDessert> arDessert;
 
@@ -25,28 +44,76 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//
+//        // MyDessert 클래스 형태의 데이터 준비
+//        arDessert = new ArrayList<MyDessert>();
+//        MyDessert mydessert;
+//        mydessert = new MyDessert(R.drawable.test, "마카롱 아이스크림");
+//        arDessert.add(mydessert);
+//        mydessert = new MyDessert(R.drawable.test, "베이비슈");
+//        arDessert.add(mydessert);
+//        mydessert = new MyDessert(R.drawable.test, "크레페");
+//        arDessert.add(mydessert);
+//        mydessert = new MyDessert(R.drawable.test, "슈");
+//        arDessert.add(mydessert);
+//        mydessert = new MyDessert(R.drawable.test, "블루베리베이글");
+//        arDessert.add(mydessert);
+//
+//        MyDessertAdapter adapter = new MyDessertAdapter(this, R.layout.item, arDessert);
+//
+//        ListView list;
+//        list = (ListView)findViewById(R.id.list);
+//        list.setAdapter(adapter);
+//
+//        System.out.print("test");
 
-        // MyDessert 클래스 형태의 데이터 준비
-        arDessert = new ArrayList<MyDessert>();
-        MyDessert mydessert;
-        mydessert = new MyDessert(R.drawable.test, "마카롱 아이스크림");
-        arDessert.add(mydessert);
-        mydessert = new MyDessert(R.drawable.test, "베이비슈");
-        arDessert.add(mydessert);
-        mydessert = new MyDessert(R.drawable.test, "크레페");
-        arDessert.add(mydessert);
-        mydessert = new MyDessert(R.drawable.test, "슈");
-        arDessert.add(mydessert);
-        mydessert = new MyDessert(R.drawable.test, "블루베리베이글");
-        arDessert.add(mydessert);
 
-        MyDessertAdapter adapter = new MyDessertAdapter(this, R.layout.item, arDessert);
+        Button buttonGet = (Button) findViewById(R.id.btn_sendData);
+        buttonGet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        ListView list;
-        list = (ListView)findViewById(R.id.list);
-        list.setAdapter(adapter);   
 
-        System.out.print("test");
+                Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        HttpClient httpClient = new DefaultHttpClient();
+
+                        String urlString = "http://192.168.0.10:3000/icebox/recipe";
+                        String param="?item=계란";
+                        try {
+                            URI url = new URI(urlString + param);
+
+                            HttpGet httpGet = new HttpGet();
+                            httpGet.setURI(url);
+
+
+                            HttpResponse response = httpClient.execute(httpGet);
+                            String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+
+                            JSONObject myObject = new JSONObject(responseString);
+                            Log.d("icebox", "json response");
+                            Log.d("icebox", myObject.toString());
+
+
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        } catch (ClientProtocolException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                };
+
+
+                thread.start();
+            }
+        });
+
     }
 }
 
